@@ -16,4 +16,5 @@ parserOptions:
 plugins:
   - react
   - '@typescript-eslint'
-rules: {}
+rules:
+  import/prefer-default-export: 0
