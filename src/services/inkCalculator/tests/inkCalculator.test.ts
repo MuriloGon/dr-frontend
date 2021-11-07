@@ -1,5 +1,5 @@
 import * as inkCalculator from '..';
-import { Wall } from '../_utils';
+import { Door, Wall } from '../_utils';
 
 const failWall1: Wall = { width: 0.5, height: 15 };
 const failWall2: Wall = { width: 15, height: 0.5 };
@@ -38,5 +38,12 @@ describe('Wall dimensions constrains', () => {
     expect(() => inkCalculator.validateWallDimensions(failWall4)).toThrow(errorMsg);
     expect(inkCalculator.validateWallDimensions(success1)).toBeTruthy();
     expect(inkCalculator.validateWallDimensions(success2)).toBeTruthy();
+  });
+
+  test('wallLimits() compute minimum wall dimensions', () => {
+    const mockA: Door[] = [{ width: 2, height: 1.2 }, { width: 5, height: 2.2 }];
+    const expectedA = { width: { min: 1, max: 15 }, height: { min: 2.5, max: 15 } };
+    const receivedA = inkCalculator.wallLimits(mockA, []);
+    expect(receivedA).toStrictEqual(expectedA);
   });
 });

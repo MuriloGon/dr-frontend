@@ -12,3 +12,33 @@ export function validateWallDimensions(wall: Wall) {
   }
   return true;
 }
+
+/* WALLS LIMITS */
+export function maxObjectsHeight(doors: Door[], windows: Window[]) {
+  return Math.max(
+    ...doors.map(({ height }) => height),
+    ...windows.map(({ height }) => height),
+  );
+}
+
+export function maxObjectsWidth(doors: Door[], windows: Window[]) {
+  return Math.max(
+    ...doors.map(({ width }) => width),
+    ...windows.map(({ width }) => width),
+  );
+}
+
+export function wallLimits(doors: Door[], windows: Window[], offset = 0.3) {
+  const hasDoors = doors.length > 0;
+
+  const minHeight: number = maxObjectsHeight(doors, windows);
+
+  const width = { min: 1, max: 15 };
+  const height = { min: (hasDoors ? (minHeight + offset) : 1), max: 15 };
+
+  return { width, height };
+}
+
+export default {
+  wallLimits,
+};
