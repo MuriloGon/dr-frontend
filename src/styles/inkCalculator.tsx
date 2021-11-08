@@ -25,8 +25,8 @@ export const InkCalcWallButton = styled.button<{ selected?: boolean }>`
   cursor: pointer;
   font-weight: 600;
   transition: color 0.2s, background 0.2s;
-  color: ${({ theme: { primary2, primary }, selected }) => selected ? primary2 : primary};
-  background: ${({ theme: { primary2, primary }, selected }) => selected ? primary : primary2};
+  color: ${({ theme: { primary2, primary }, selected }) => (selected ? primary2 : primary)};
+  background: ${({ theme: { primary2, primary }, selected }) => (selected ? primary : primary2)};
 
   :active {
     background: #be5c00;

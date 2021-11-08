@@ -1,16 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
 import { ThemeProvider } from 'styled-components';
+import { BrowserRouter } from 'react-router-dom';
+import App from './App';
 import themes from './styles/themes';
-import InkCalculator from './components/InkCalculator';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={themes.light}>
-      <InkCalculator />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root'),
