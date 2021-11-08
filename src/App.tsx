@@ -1,5 +1,9 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import Admin from '@pages/Admin';
+import Home from '@pages/Home';
+import UsersInks from '@pages/UsersInks';
+import NotFound from '@pages/NotFound';
 
 function App() {
   return (
@@ -8,10 +12,10 @@ function App() {
         Navbar
       </nav>
       <Routes>
-        <Route path="/" element={(<h1>Home</h1>)} />
-        <Route path="/users-inks" element={(<h1>inks</h1>)} />
-        <Route path="/admin" element={(<h1>admin</h1>)} />
-        <Route path="*" element={<h1>Not Found</h1>} />
+        <Route path="/" element={<Home />} />
+        <Route path="/users-inks" element={<UsersInks />} />
+        <Route path="/admin" element={<Admin />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
