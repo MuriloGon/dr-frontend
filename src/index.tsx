@@ -1,12 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
+import { ThemeProvider } from 'styled-components';
+import themes from './styles/themes';
+import InkCalculator from './components/InkCalculator';
 import reportWebVitals from './reportWebVitals';
+import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={themes.light}>
+      <InkCalculator />
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
