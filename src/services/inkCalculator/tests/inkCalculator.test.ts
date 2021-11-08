@@ -31,13 +31,15 @@ describe('Helpers Functions', () => {
 
 describe('Wall dimensions constrains', () => {
   test('no walls should be less than 1 meter and more than 15 meters - No Doors or windows', () => {
-    const errorMsg = /A wall must have at least 1 and at most 15/;
-    expect(() => inkCalculator.validateWallDimensions(failWall1)).toThrow(errorMsg);
-    expect(() => inkCalculator.validateWallDimensions(failWall2)).toThrow(errorMsg);
-    expect(() => inkCalculator.validateWallDimensions(failWall3)).toThrow(errorMsg);
-    expect(() => inkCalculator.validateWallDimensions(failWall4)).toThrow(errorMsg);
-    expect(inkCalculator.validateWallDimensions(success1)).toBeTruthy();
-    expect(inkCalculator.validateWallDimensions(success2)).toBeTruthy();
+    const message = 'A wall must have at least 1 and at most 15';
+    const errorMessage = { valid: false, message };
+    const okMessage = { valid: true };
+    expect(inkCalculator.validateWallDimensions(failWall1)).toStrictEqual(errorMessage);
+    expect(inkCalculator.validateWallDimensions(failWall2)).toStrictEqual(errorMessage);
+    expect(inkCalculator.validateWallDimensions(failWall3)).toStrictEqual(errorMessage);
+    expect(inkCalculator.validateWallDimensions(failWall4)).toStrictEqual(errorMessage);
+    expect(inkCalculator.validateWallDimensions(success1)).toStrictEqual(okMessage);
+    expect(inkCalculator.validateWallDimensions(success2)).toStrictEqual(okMessage);
   });
 
   test('wallLimits() compute minimum wall dimensions', () => {
@@ -45,5 +47,11 @@ describe('Wall dimensions constrains', () => {
     const expectedA = { width: { min: 1, max: 15 }, height: { min: 2.5, max: 15 } };
     const receivedA = inkCalculator.wallLimits(mockA, []);
     expect(receivedA).toStrictEqual(expectedA);
+  });
+});
+
+describe('doors and windows [min, max] quantity', () => {
+  test('', () => {
+
   });
 });
