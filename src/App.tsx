@@ -4,13 +4,12 @@ import Admin from '@pages/Admin';
 import Home from '@pages/Home';
 import UsersInks from '@pages/UsersInks';
 import NotFound from '@pages/NotFound';
+import Navbar from '@components/Navbar';
 
 function App() {
   return (
     <>
-      <nav>
-        Navbar
-      </nav>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/users-inks" element={<UsersInks />} />

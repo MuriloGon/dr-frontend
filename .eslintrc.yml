@@ -12,9 +12,11 @@ parserOptions:
     jsx: true
   ecmaVersion: 12
   sourceType: module
-  project: ./tsconfig.json
+  project: [./tsconfig.json, craco.config.js]
+ignorePatterns: ["/*.*"]
 plugins:
   - react
   - '@typescript-eslint'
 rules:
   import/prefer-default-export: 0
+  react/jsx-props-no-spreading: 0

@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 import { Form } from '@styles/inkCalculator';
-import { wall, WallComputation as WallCompType } from './_utils';
+import { Wall, WallComputation as WallCompType } from './_utils';
 import InkInput from './InkInput';
 
 type Props = {
-  wallName: wall;
+  wallName: Wall;
   currentWall: WallCompType,
   setData: {
     setHeight: (height: number) => void,
@@ -12,14 +12,18 @@ type Props = {
     setDoors: (doors: number) => void,
     setWindows: (windows: number) => void
   }
-}
+};
 
 const WallComputation: FC<Props> = ({ wallName, currentWall, setData }) => {
   const st = { display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', justifyItems: 'center' };
   return (
     <Form>
       <div>
-        <h3 style={{ textAlign: 'center', margin: '5px 0' }}>Parede {wallName}</h3>
+        <h3 style={{ textAlign: 'center', margin: '5px 0' }}>
+          Parede
+          {' '}
+          {wallName}
+        </h3>
         <div className="line" />
         <div style={st}>
           <InkInput
@@ -60,6 +64,6 @@ const WallComputation: FC<Props> = ({ wallName, currentWall, setData }) => {
       </div>
     </Form>
   );
-}
+};
 
 export default WallComputation;
