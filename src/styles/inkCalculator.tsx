@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 
 export const InkCalcContainer = styled.div`
+  margin-block: 10px;
+  margin: 0 auto;
   max-width: 100%;
+  box-sizing: border-box;
   border-radius: 8px;
   box-sizing: border-box;
   border: 1px solid ${({ theme: { primary } }) => primary};
@@ -15,6 +18,22 @@ export const InkCalcTitle = styled.h1`
   font-size: 18px;
   font-weight: 700;
   color: ${({ theme: { primary } }) => primary};
+`;
+
+export const InkH2 = styled.h2`
+  margin: 4px;
+  font-size: 15px;
+  text-align: center;
+`;
+
+export const ButtonsContainer = styled.div`
+  display: flex;
+  margin-block: 20px;
+  justify-content: space-evenly;
+  flex-flow: row wrap;
+  & > * {
+    margin-inline: 2px;
+  }
 `;
 
 export const InkCalcWallButton = styled.button<{ selected?: boolean }>`
@@ -39,8 +58,6 @@ export const InkCalcWallButton = styled.button<{ selected?: boolean }>`
 `;
 
 export const Form = styled.form`
-  margin-top: 10px;
-
   .line {
     height: 1px;
     margin-top: 0;
@@ -54,6 +71,7 @@ export const InkInputContainer = styled.label`
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
+  font-size: 14px;
   min-width: 200px;
   max-width: 200px;
   span {
@@ -78,4 +96,10 @@ export const Input = styled.input`
   :focus {
     border: 2px solid ${({ theme }) => theme.primary};
   }
+`;
+
+export const InputsContainer = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
 `;

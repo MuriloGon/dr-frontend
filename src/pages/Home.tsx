@@ -1,8 +1,11 @@
 import React from 'react';
+import InkCalculator from '@components/InkCalculator';
 
 function Home() {
   return (
-    <h1>Home</h1>
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)' }}>
+      <InkCalculator />
+    </div>
   );
 }
 

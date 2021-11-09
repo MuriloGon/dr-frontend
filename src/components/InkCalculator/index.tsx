@@ -34,7 +34,6 @@ function InkCalculator() {
       <InkCalcTitle>Ink Calculator</InkCalcTitle>
       <WallSelection currentSelected={currentWall} onClick={setCurrentWall} />
       <WallComputation
-        wallName={currentWall}
         currentWall={walls[currentWall]}
         setData={setData}
       />
