@@ -5,6 +5,7 @@ import Home from '@pages/Home';
 import UsersInks from '@pages/UsersInks';
 import NotFound from '@pages/NotFound';
 import Navbar from '@components/Navbar';
+import { MainContainer } from '@styles/containers';
 import { Routes as AppRoutes } from './utils/globalVariables';
 
 function App() {
@@ -21,7 +22,7 @@ function App() {
   }, [location.pathname]);
 
   return (
-    <>
+    <MainContainer>
       <Navbar currentRoute={route} />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -29,7 +30,7 @@ function App() {
         <Route path="/admin" element={<Admin />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </>
+    </MainContainer>
   );
 }
 
