@@ -11,8 +11,7 @@ const Navbar: FC<Props> = ({ currentRoute }) => {
   const buttonSelected = (route: Routes) => currentRoute === route;
   return (
     <NavbarContainer>
-      <div />
-      <div className="main-nav-btns">
+      <div>
         <Link to="/">
           <NavButton
             selected={buttonSelected(Routes.home)}

@@ -4,12 +4,21 @@ export const NavbarContainer = styled.nav`
   --size: 150px;
   display: grid;
   grid-template-columns: var(--size) 1fr var(--size);
-  height: 50px;
+  grid-template-areas: ". b c";
+  padding-block: 10px;
   place-items: center;
+
+  & > *:nth-child(1) { grid-area: b; }
+  & > *:nth-child(2) { grid-area: c; }
 
   span {
     display: inline-block;
     height: 100%;
+  }
+
+  @media screen and (max-width: 550px) {
+    grid-template-areas: "b c";
+    grid-template-columns: 1fr min-content;
   }
 `;
 
@@ -28,7 +37,7 @@ export const NavButton = styled.button<{
 }>`
   padding: 8px;
   box-sizing: border-box;
-  width: 115px;
+  width: max-content;
   border: none;
   font-size: 16px;
   font-weight: bold;
