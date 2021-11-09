@@ -14,7 +14,13 @@ const InkInput: FC<Props> = ({
 }) => (
   <InkInputContainer>
     <span>{name}</span>
-    <Input min={min} max={max} value={value} onChange={onChange} type="number" />
+    <Input
+      min={min}
+      max={max}
+      value={value}
+      onChange={onChange}
+      type="number"
+    />
   </InkInputContainer>
 );
 

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { InkCalcWallButton } from '../../styles/inkCalculator';
+import { InkCalcWallButton, ButtonsContainer } from '@styles/inkCalculator';
 import { Wall } from './_utils';
 
 type Props = {
@@ -13,12 +13,12 @@ const WallSelection: FC<Props> = ({ currentSelected, onClick }) => {
     selected: currentSelected === selection,
   });
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
+    <ButtonsContainer>
       <InkCalcWallButton {...eventsHandle(Wall.wallA1)}>Parede A1</InkCalcWallButton>
       <InkCalcWallButton {...eventsHandle(Wall.wallA2)}>Parede A2</InkCalcWallButton>
       <InkCalcWallButton {...eventsHandle(Wall.wallB1)}>Parede B1</InkCalcWallButton>
       <InkCalcWallButton {...eventsHandle(Wall.wallB2)}>Parede B2</InkCalcWallButton>
-    </div>
+    </ButtonsContainer>
   );
 };
 

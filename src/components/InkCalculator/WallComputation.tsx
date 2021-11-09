@@ -1,10 +1,9 @@
 import React, { FC } from 'react';
-import { Form } from '@styles/inkCalculator';
-import { Wall, WallComputation as WallCompType } from './_utils';
+import { Form, InputsContainer, InkH2 } from '@styles/inkCalculator';
+import { WallComputation as WallCompType } from './_utils';
 import InkInput from './InkInput';
 
 type Props = {
-  wallName: Wall;
   currentWall: WallCompType,
   setData: {
     setHeight: (height: number) => void,
@@ -14,53 +13,55 @@ type Props = {
   }
 };
 
-const WallComputation: FC<Props> = ({ wallName, currentWall, setData }) => {
-  const st = { display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', justifyItems: 'center' };
+const WallComputation: FC<Props> = ({ currentWall, setData }) => {
+  const WallInputs = () => (
+    <InputsContainer>
+      <InkInput
+        min={1}
+        max={15}
+        value={currentWall.wall.height}
+        name="Altura"
+        onChange={({ target: { valueAsNumber } }) => setData.setHeight(valueAsNumber)}
+      />
+      <InkInput
+        min={1}
+        max={15}
+        value={currentWall.wall.width}
+        name="Largura"
+        onChange={({ target: { valueAsNumber } }) => setData.setWidth(valueAsNumber)}
+      />
+    </InputsContainer>
+  );
+
+  const DoorsAndWindowsInputs = () => (
+    <InputsContainer>
+      <InkInput
+        min={0}
+        max={100}
+        value={currentWall.windows}
+        name="Janelas"
+        onChange={({ target: { valueAsNumber } }) => setData.setWindows(valueAsNumber)}
+      />
+      <InkInput
+        min={1}
+        max={100}
+        value={currentWall.doors}
+        name="Portas"
+        onChange={({ target: { valueAsNumber } }) => setData.setDoors(valueAsNumber)}
+      />
+    </InputsContainer>
+  );
   return (
     <Form>
       <div>
-        <h3 style={{ textAlign: 'center', margin: '5px 0' }}>
-          Parede
-          {' '}
-          {wallName}
-        </h3>
+        <InkH2>Dimensões da parede</InkH2>
         <div className="line" />
-        <div style={st}>
-          <InkInput
-            min={1}
-            max={15}
-            value={currentWall.wall.height}
-            name="Altura"
-            onChange={({ target: { valueAsNumber } }) => setData.setHeight(valueAsNumber)}
-          />
-          <InkInput
-            min={1}
-            max={15}
-            value={currentWall.wall.width}
-            name="Largura"
-            onChange={({ target: { valueAsNumber } }) => setData.setWidth(valueAsNumber)}
-          />
-        </div>
+        {WallInputs()}
       </div>
       <div>
-        <h3 style={{ textAlign: 'center', margin: '5px 0' }}>Portas e Janelas</h3>
+        <InkH2>Portas e Janelas</InkH2>
         <div className="line" />
-        <div style={st}>
-          <InkInput
-            min={1}
-            max={15}
-            value={currentWall.windows}
-            name="Janelas"
-            onChange={({ target: { valueAsNumber } }) => setData.setWindows(valueAsNumber)}
-          />
-          <InkInput
-            min={1}
-            max={15}
-            value={currentWall.doors}
-            name="Portas"
-            onChange={({ target: { valueAsNumber } }) => setData.setDoors(valueAsNumber)}
-          />
-        </div>
+        {DoorsAndWindowsInputs()}
       </div>
     </Form>
   );
