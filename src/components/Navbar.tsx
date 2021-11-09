@@ -1,20 +1,49 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
+import { NavbarContainer, NavButton } from '@styles/navbar';
+import { Routes } from '../utils/globalVariables';
 
-function Navbar() {
+type Props = {
+  currentRoute: Routes
+};
+
+const Navbar: FC<Props> = ({ currentRoute }) => {
+  const buttonSelected = (route: Routes) => currentRoute === route;
   return (
-    <div>
-      <Link to="/">
-        <button type="button">Home</button>
-      </Link>
-      <Link to="users-inks">
-        <button type="button">Users Inks</button>
-      </Link>
+    <NavbarContainer>
+      <div />
+      <div className="main-nav-btns">
+        <Link to="/">
+          <NavButton
+            selected={buttonSelected(Routes.home)}
+            rounded="left"
+            type="button"
+          >
+            Home
+
+          </NavButton>
+        </Link>
+        <Link to="users-inks">
+          <NavButton
+            selected={buttonSelected(Routes.inks)}
+            rounded="right"
+            type="button"
+          >
+            Users Inks
+          </NavButton>
+        </Link>
+      </div>
       <Link to="admin">
-        <button type="button">Admin</button>
+        <NavButton
+          selected={buttonSelected(Routes.admin)}
+          rounded="all"
+          type="button"
+        >
+          Login admin
+        </NavButton>
       </Link>
-    </div>
+    </NavbarContainer>
   );
-}
+};
 
 export default Navbar;
