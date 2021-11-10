@@ -12,7 +12,7 @@ describe('Helpers Functions', () => {
   test('The maxObjectsHeight() must return the greater height among all doors and windows', () => {
     const mockDoors = [{ width: 2, height: 2.4 }, { width: 0.5, height: 3 }];
     const mockWindows = [{ width: 1, height: 2.5 }, { width: 2, height: 2.1 }];
-    const expected = inkCalculator.maxObjectsHeight(mockDoors, mockWindows);
+    const expected = inkCalculator.minWallHeight(mockDoors, mockWindows);
     expect(expected).not.toBe(2.1);
     expect(expected).not.toBe(2.4);
     expect(expected).not.toBe(2.6);
@@ -21,7 +21,7 @@ describe('Helpers Functions', () => {
   test('The maxObjectsWidth() must return the greater width among all doors and windows', () => {
     const mockDoors = [{ width: 5, height: 2.4 }, { width: 0.5, height: 3 }];
     const mockWindows = [{ width: 1, height: 2.5 }, { width: 2, height: 2.1 }];
-    const expected = inkCalculator.maxObjectsWidth(mockDoors, mockWindows);
+    const expected = inkCalculator.minWallWidth(mockDoors, mockWindows);
     expect(expected).not.toBe(0.5);
     expect(expected).not.toBe(1);
     expect(expected).not.toBe(2);
