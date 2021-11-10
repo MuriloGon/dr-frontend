@@ -47,8 +47,8 @@ class LocalAPI implements ApiInterface {
     return { message: 'ok', data: db };
   }
 
-  async editInkById(editInk: Ink) {
-    const index = db.findIndex((item) => item._id === editInk._id);
+  async editInkById(id: string, editInk: Ink) {
+    const index = db.findIndex((item) => item._id === id);
     db[index] = editInk;
     return { message: 'ok', data: db[index] };
   }

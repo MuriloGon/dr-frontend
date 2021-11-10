@@ -24,7 +24,8 @@ export type Ink = {
 export default interface ApiInterface {
   getInkById: (id: string) => Promise<{ message: string, data?: Ink }>;
   getAllInks: () => Promise<{ message: string, data?: Ink[] }>;
-  editInkById: (editInk: Ink) => Promise<{ message: string, data?: Ink }>;
-  deleteInkById: (id: string) => Promise<{ message: string, data?: Ink }>;
+  editInkById: (
+    id: string, editInk: Ink, token: string) => Promise<{ message: string, data?: Ink }>;
+  deleteInkById: (id: string, token: string) => Promise<{ message: string, data?: Ink }>;
   login: (email: string, password: string) => Promise<{ message: string, token: string }>;
 }
