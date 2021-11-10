@@ -17,3 +17,5 @@ export const initialState = {
   B1: { wall: { width: 1, height: 1 }, doors: 0, windows: 0 },
   B2: { wall: { width: 1, height: 1 }, doors: 0, windows: 0 },
 };
+
+export type Walls = typeof initialState;

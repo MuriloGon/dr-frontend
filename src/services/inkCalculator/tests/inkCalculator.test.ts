@@ -12,7 +12,7 @@ describe('Helpers Functions', () => {
   test('The maxObjectsHeight() must return the greater height among all doors and windows', () => {
     const mockDoors = [{ width: 2, height: 2.4 }, { width: 0.5, height: 3 }];
     const mockWindows = [{ width: 1, height: 2.5 }, { width: 2, height: 2.1 }];
-    const expected = inkCalculator.maxObjectsHeight(mockDoors, mockWindows);
+    const expected = inkCalculator.minWallHeight(mockDoors, mockWindows);
     expect(expected).not.toBe(2.1);
     expect(expected).not.toBe(2.4);
     expect(expected).not.toBe(2.6);
@@ -21,7 +21,7 @@ describe('Helpers Functions', () => {
   test('The maxObjectsWidth() must return the greater width among all doors and windows', () => {
     const mockDoors = [{ width: 5, height: 2.4 }, { width: 0.5, height: 3 }];
     const mockWindows = [{ width: 1, height: 2.5 }, { width: 2, height: 2.1 }];
-    const expected = inkCalculator.maxObjectsWidth(mockDoors, mockWindows);
+    const expected = inkCalculator.minWallWidth(mockDoors, mockWindows);
     expect(expected).not.toBe(0.5);
     expect(expected).not.toBe(1);
     expect(expected).not.toBe(2);
@@ -29,9 +29,36 @@ describe('Helpers Functions', () => {
   });
 });
 
+describe('calculator validations', () => {
+  test('validadeMinimumWallWidth()', () => {
+    const result = inkCalculator.validateMinimumWallHeight(
+      2, [{ width: 0.8, height: 1.9 }], [{ width: 2, height: 1.8 }],
+    );
+    expect(result).toStrictEqual(
+      { valid: false, message: 'A parede deve ter, pelo menos, 2.20m de altura' },
+    );
+    const result2 = inkCalculator.validateMinimumWallHeight(
+      4, [{ width: 0.8, height: 1.9 }], [{ width: 2, height: 1.8 }],
+    );
+    expect(result2).toStrictEqual({ valid: true });
+  });
+  test('validadeMinimumWallWidth()', () => {
+    const result = inkCalculator.validadeMinimumWallWidth(
+      0.3, [{ width: 0.8, height: 1.9 }], [{ width: 0.3, height: 1.8 }],
+    );
+    expect(result).toStrictEqual(
+      { valid: false, message: 'A parede deve ter, pelo menos, 1.10m de largura' },
+    );
+    const result2 = inkCalculator.validadeMinimumWallWidth(
+      2, [{ width: 0.8, height: 1.9 }], [{ width: 0.3, height: 1.8 }],
+    );
+    expect(result2).toStrictEqual({ valid: true });
+  });
+});
+
 describe('Wall dimensions constrains', () => {
   test('no walls should be less than 1 meter and more than 15 meters - No Doors or windows', () => {
-    const message = 'A wall must have at least 1 and at most 15';
+    const message = 'A altura ou largura da parede deve ter entre 1m e 15m';
     const errorMessage = { valid: false, message };
     const okMessage = { valid: true };
     expect(inkCalculator.validateWallDimensions(failWall1)).toStrictEqual(errorMessage);
@@ -50,8 +77,59 @@ describe('Wall dimensions constrains', () => {
   });
 });
 
-describe('doors and windows [min, max] quantity', () => {
-  test('', () => {
+describe('Ink computation result functions', () => {
+  test('calcMinimumInkCans() compute intelligent ink cans computation', () => {
+    const result1 = inkCalculator.calcMinimumInkCans(0.8, [0.5, 2.5, 3.6, 18]);
+    const expected1 = {
+      0.5: 2, 2.5: 0, 3.6: 0, 18: 0,
+    };
 
+    const result2 = inkCalculator.calcMinimumInkCans(2.5, [0.5, 2.5, 3.6, 18]);
+    const expected2 = {
+      0.5: 0, 2.5: 1, 3.6: 0, 18: 0,
+    };
+    expect(result2).toStrictEqual(expected2);
+
+    expect(result1).toStrictEqual(expected1);
+
+    const result3 = inkCalculator.calcMinimumInkCans(3.54, [0.5, 2.5, 3.6, 18]);
+    const expected3 = {
+      0.5: 3, 2.5: 1, 3.6: 0, 18: 0,
+    };
+    expect(result3).toStrictEqual(expected3);
+
+    const result4 = inkCalculator.calcMinimumInkCans(20.45, [0.5, 2.5, 3.6, 18]);
+    const expected4 = {
+      0.5: 5, 2.5: 0, 3.6: 0, 18: 1,
+    };
+    expect(result4).toStrictEqual(expected4);
+
+    const result5 = inkCalculator.calcMinimumInkCans(20.5, [0.5, 2.5, 3.6, 18]);
+    const expected5 = {
+      0.5: 0, 2.5: 1, 3.6: 0, 18: 1,
+    };
+    expect(result5).toStrictEqual(expected5);
+
+    const result6 = inkCalculator.calcMinimumInkCans(1.5999999999999999, [0.5, 2.5, 3.6, 18]);
+    const expected6 = {
+      0.5: 4, 2.5: 0, 3.6: 0, 18: 0,
+    };
+    expect(result6).toStrictEqual(expected6);
+  });
+  test('totalInk() compute the total ink in liters', () => {
+    const totalArea1 = inkCalculator.totalInk(
+      { width: 10, height: 10 },
+      [{ width: 5, height: 5 }],
+      [{ width: 5, height: 5 }],
+    );
+    expect(totalArea1).toBe((100 - 50) / 5);
+
+    const totalArea2 = inkCalculator.totalInk(
+      { width: 10, height: 10 },
+      [{ width: 5, height: 5 }],
+      [{ width: 5, height: 5 }],
+      3,
+    );
+    expect(totalArea2).toBe((100 - 50) / 3);
   });
 });

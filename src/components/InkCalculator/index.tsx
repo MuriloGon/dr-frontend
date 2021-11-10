@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { InkCalcContainer, InkCalcTitle } from '@styles/inkCalculator';
-import WallSelection from './WallSelection';
-import WallComputation from './WallComputation';
-import { Wall, initialState } from './_utils';
+import { Wall, initialState, Walls } from './_utils';
+import InkResult from './InkResult';
+import InkForms from './InkForms';
 
 function InkCalculator() {
   const [currentWall, setCurrentWall] = useState<Wall>(Wall.wallA1);
-  const [walls, setWalls] = useState(initialState);
+  const [walls, setWalls] = useState<Walls>(initialState);
 
   const setHeight = (height: number) => (
     setWalls((st) => ({
@@ -29,15 +28,28 @@ function InkCalculator() {
     setHeight, setWidth, setDoors, setWindows,
   };
 
+  const resetComputations = () => {
+    setWalls(initialState);
+  };
+
+  const windowDim = { width: 2, height: 1.2 };
+  const doorDim = { width: 0.8, height: 1.9 };
+
   return (
-    <InkCalcContainer>
-      <InkCalcTitle>Ink Calculator</InkCalcTitle>
-      <WallSelection currentSelected={currentWall} onClick={setCurrentWall} />
-      <WallComputation
-        currentWall={walls[currentWall]}
+    <>
+      <InkForms
+        currentWall={currentWall}
+        setCurrentWall={setCurrentWall}
         setData={setData}
+        walls={walls}
       />
-    </InkCalcContainer>
+      <InkResult
+        resetComputations={resetComputations}
+        windowDimension={windowDim}
+        doorDimension={doorDim}
+        walls={walls}
+      />
+    </>
   );
 }
 

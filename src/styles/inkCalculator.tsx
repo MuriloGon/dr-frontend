@@ -103,3 +103,57 @@ export const InputsContainer = styled.div`
   flex-flow: row wrap;
   justify-content: center;
 `;
+
+export const MessageErrorContainer = styled.div`
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  background: hsl(0, 100%, 90%);
+  color: hsl(0, 50%, 30%);
+`;
+
+export const ResultContainer = styled.div`
+  display: flex;
+  flex-flow: column;
+  overflow-y: auto;
+  padding: 20px;
+  max-height: 450px;
+  overflow-y: auto;
+
+  color: ${({ theme }) => theme.primary};
+  border: 1px solid ${({ theme }) => theme.primary};
+  border-radius: 8px;
+
+  .compute-action-btns {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .compute-forms {
+    display: flex;
+    flex-flow: column nowrap;
+    flex: 1;
+
+    select {
+      width: 100%;
+      padding: 8px;
+      font-size: 14px;
+      border-radius: 8px;
+      margin-top: 5px;
+      background: white;
+      color: ${({ theme }) => theme.primary};
+      font-weight: bold;
+      border-color: ${({ theme }) => theme.primary};
+    }
+  }
+
+  .compute-forms-content {
+    flex: 1;
+  }
+
+  .compute-forms > *  > *, .compute-forms > * {
+    margin-bottom: 10px;
+  }
+
+  h3 { margin: 0; }
+`;

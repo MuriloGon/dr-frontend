@@ -5,7 +5,7 @@ export const NavbarContainer = styled.nav`
   display: grid;
   grid-template-columns: var(--size) 1fr var(--size);
   grid-template-areas: ". b c";
-  padding-block: 10px;
+  padding-block: 20px;
   place-items: center;
 
   & > *:nth-child(1) { grid-area: b; }
