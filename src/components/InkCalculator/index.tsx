@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { InkCalcContainer, InkCalcTitle } from '@styles/inkCalculator';
-import WallSelection from './WallSelection';
-import WallComputation from './WallComputation';
 import { Wall, initialState } from './_utils';
 import InkResult from './InkResult';
+import InkForms from './InkForms';
 
 function InkCalculator() {
   const [currentWall, setCurrentWall] = useState<Wall>(Wall.wallA1);
@@ -35,14 +33,12 @@ function InkCalculator() {
 
   return (
     <>
-      <InkCalcContainer>
-        <InkCalcTitle>Ink Calculator</InkCalcTitle>
-        <WallSelection currentSelected={currentWall} onClick={setCurrentWall} />
-        <WallComputation
-          currentWall={walls[currentWall]}
-          setData={setData}
-        />
-      </InkCalcContainer>
+      <InkForms
+        currentWall={currentWall}
+        setCurrentWall={setCurrentWall}
+        setData={setData}
+        walls={walls}
+      />
       <InkResult
         windowDimension={windowDim}
         doorDimension={doorDim}

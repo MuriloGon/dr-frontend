@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { InkCalcWallButton, ButtonsContainer } from '@styles/inkCalculator';
-import { Wall } from './_utils';
+import { Wall } from '../_utils';
 
 type Props = {
   currentSelected: Wall;

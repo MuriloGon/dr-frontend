@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Form, InputsContainer, InkH2 } from '@styles/inkCalculator';
-import { WallComputation as WallCompType } from './_utils';
+import { WallComputation as WallCompType } from '../_utils';
 import InkInput from './InkInput';
 
 type Props = {
