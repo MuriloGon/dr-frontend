@@ -10,35 +10,44 @@ const endpoint = 'http://localhost:3030';
 // }
 
 class LocalAPI implements ApiInterface {
-  async getInkById(id: string) {
-    const res = await axios.get<Ink>(`${endpoint}/inks/${id}`);
+  async createInk(ink: Ink) {
+    const res = await axios
+      .post<{ message: string, data: Ink }>(`${endpoint}/inks/`, {
+      ...ink,
+    });
+    return { message: 'ok', data: res.data.data };
+  }
 
-    return { message: 'ok', data: res.data };
+  async getInkById(id: string) {
+    const res = await axios.get<{ message: string, data: Ink }>(`${endpoint}/inks/${id}`);
+
+    return { message: 'ok', data: res.data.data };
   }
 
   async getAllInks() {
-    const res = await axios.get<Ink[]>(`${endpoint}/inks/`);
-    return { message: 'ok', data: res.data };
+    const res = await axios.get<{ message: string, data: Ink[] }>(`${endpoint}/inks/`);
+    console.log(res);
+    return { message: 'ok', data: res.data.data };
   }
 
   async editInkById(id: string, editInk: Ink, token: string) {
-    const res = await axios.put<Ink>(`${endpoint}/inks/${id}`, editInk, {
+    const res = await axios.put<{ message: string, data: Ink }>(`${endpoint}/inks/${id}`, editInk, {
       headers: {
         authorization: token,
       },
     });
 
-    return { message: 'ok', data: res.data };
+    return { message: 'ok', data: res.data.data };
   }
 
   async deleteInkById(id: string, token: string) {
-    const res = await axios.delete<Ink>(`${endpoint}/inks/${id}`, {
+    const res = await axios.delete<{ message: string, data: Ink }>(`${endpoint}/inks/${id}`, {
       headers: {
         authorization: token,
       },
     });
 
-    return { message: 'ok', data: res.data };
+    return { message: 'ok', data: res.data.data };
   }
 
   async login(email: string, password: string) {

@@ -12,7 +12,7 @@ export type Wall = {
   windows: number;
 };
 export type Ink = {
-  '_id': string
+  'id'?: string
   'createdAt': number;
   'canSize': CanSize
   'wall-a': Wall;
@@ -24,6 +24,7 @@ export type Ink = {
 export default interface ApiInterface {
   getInkById: (id: string) => Promise<{ message: string, data?: Ink }>;
   getAllInks: () => Promise<{ message: string, data?: Ink[] }>;
+  createInk: (ink: Ink) => Promise<{ message: string, data: Ink }>;
   editInkById: (
     id: string, editInk: Ink, token: string) => Promise<{ message: string, data?: Ink }>;
   deleteInkById: (id: string, token: string) => Promise<{ message: string, data?: Ink }>;

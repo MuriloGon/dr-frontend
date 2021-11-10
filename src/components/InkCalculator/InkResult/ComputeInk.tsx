@@ -2,6 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 import { totalInk, calcMinimumInkCans } from '@services/inkCalculator';
 import { InkCalcWallButton } from '@styles/inkCalculator';
 import { Walls } from '../_utils';
+import API from '../../../api';
 
 type Props = {
   walls: Walls;
@@ -107,13 +108,13 @@ const ComputeInk: FC<Props> = ({
           <h3>Mínimo de latas de cada tipo:</h3>
           <ul>
             {
-            Object.entries(result.totalCans).map(([key, cans], i) => (
-              <li key={`optimal-can-${i}`}>
-                <b>{`Lata ${key}L: `}</b>
-                {`${cans}`}
-              </li>
-            ))
-          }
+              Object.entries(result.totalCans).map(([key, cans], i) => (
+                <li key={`optimal-can-${i}`}>
+                  <b>{`Lata ${key}L: `}</b>
+                  {`${cans}`}
+                </li>
+              ))
+            }
           </ul>
         </div>
       </div>
@@ -130,7 +131,16 @@ const ComputeInk: FC<Props> = ({
 
         <InkCalcWallButton
           type="button"
-          onClick={() => setCalcState(CalcState.initial)}
+          onClick={() => {
+            API.createInk({
+              createdAt: new Date().getTime(),
+              canSize,
+              'wall-a': { ...walls.A1.wall, doors: walls.A1.doors, windows: walls.A1.windows },
+              'wall-b': { ...walls.A2.wall, doors: walls.A2.doors, windows: walls.A2.windows },
+              'wall-c': { ...walls.B1.wall, doors: walls.B1.doors, windows: walls.B1.windows },
+              'wall-d': { ...walls.B2.wall, doors: walls.B2.doors, windows: walls.B2.windows },
+            }).then(() => { alert('registro salvo'); }).catch(() => { alert('erro ao salvar'); });
+          }}
         >
           Salvar Resultado
         </InkCalcWallButton>

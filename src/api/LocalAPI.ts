@@ -2,7 +2,7 @@ import ApiInterface, { Ink } from './ApiInterface';
 
 const db: Ink[] = [
   {
-    _id: 'id1',
+    id: 'id1',
     createdAt: new Date().getMilliseconds(),
     canSize: 0.5,
     'wall-a': {
@@ -19,7 +19,7 @@ const db: Ink[] = [
     },
   },
   {
-    _id: 'id1',
+    id: 'id2',
     createdAt: new Date().getMilliseconds(),
     canSize: 0.5,
     'wall-a': {
@@ -38,8 +38,14 @@ const db: Ink[] = [
 ];
 
 class LocalAPI implements ApiInterface {
+  async createInk(ink: Ink) {
+    const newInk = { ...ink, id: new Date().getTime().toString() };
+    db.push(newInk);
+    return { message: 'ok', data: newInk };
+  }
+
   async getInkById(id: string) {
-    const index = db.findIndex((item) => item._id === id);
+    const index = db.findIndex((item) => item.id === id);
     return { message: 'ok', data: db[index] };
   }
 
@@ -48,13 +54,13 @@ class LocalAPI implements ApiInterface {
   }
 
   async editInkById(id: string, editInk: Ink) {
-    const index = db.findIndex((item) => item._id === id);
+    const index = db.findIndex((item) => item.id === id);
     db[index] = editInk;
     return { message: 'ok', data: db[index] };
   }
 
   async deleteInkById(id: string) {
-    const index = db.findIndex((item) => item._id === id);
+    const index = db.findIndex((item) => item.id === id);
     const cpy = { ...db[index] };
     delete db[index];
     return { message: 'ok', data: cpy };
