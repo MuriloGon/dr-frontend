@@ -124,7 +124,36 @@ export const ResultContainer = styled.div`
   border: 1px solid ${({ theme }) => theme.primary};
   border-radius: 8px;
 
-  ul { padding: 0 }
+  .compute-action-btns {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .compute-forms {
+    display: flex;
+    flex-flow: column nowrap;
+    flex: 1;
+
+    select {
+      width: 100%;
+      padding: 8px;
+      font-size: 14px;
+      border-radius: 8px;
+      margin-top: 5px;
+      background: white;
+      color: ${({ theme }) => theme.primary};
+      font-weight: bold;
+      border-color: ${({ theme }) => theme.primary};
+    }
+  }
+
+  .compute-forms-content {
+    flex: 1;
+  }
+
+  .compute-forms > *  > *, .compute-forms > * {
+    margin-bottom: 10px;
+  }
 
   h3 { margin: 0; }
 `;

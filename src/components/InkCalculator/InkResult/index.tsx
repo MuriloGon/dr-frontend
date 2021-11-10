@@ -2,15 +2,19 @@ import React, { FC } from 'react';
 import { ResultContainer } from '@styles/inkCalculator';
 import * as inkCalc from '@services/inkCalculator';
 import ErrorsLog from './ErrorsLog';
-import { initialState } from '../_utils';
+import { Walls } from '../_utils';
+import ComputeInk from './ComputeInk';
 
 type Props = {
   doorDimension: { width: number, height: number };
   windowDimension: { width: number, height: number };
-  walls: typeof initialState;
+  walls: Walls;
+  resetComputations: () => void;
 };
 
-const InkResult: FC<Props> = ({ doorDimension, windowDimension, walls }) => {
+const InkResult: FC<Props> = ({
+  doorDimension, windowDimension, walls, resetComputations,
+}) => {
   const mapWalls = Object.entries(walls).map(([key, data]) => ({
     wallName: key,
     wall: data.wall,
@@ -40,7 +44,16 @@ const InkResult: FC<Props> = ({ doorDimension, windowDimension, walls }) => {
 
   return (
     <ResultContainer>
-      {hasErrors ? (<ErrorsLog wallsErrors={formattedErrors} />) : (<h1>sem erros</h1>)}
+      {hasErrors
+        ? (<ErrorsLog wallsErrors={formattedErrors} />)
+        : (
+          <ComputeInk
+            doorDimensions={doorDimension}
+            windowDimensions={windowDimension}
+            walls={walls}
+            resetComputations={resetComputations}
+          />
+        )}
     </ResultContainer>
   );
 };

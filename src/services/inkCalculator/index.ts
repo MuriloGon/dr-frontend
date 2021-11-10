@@ -92,3 +92,23 @@ export function totalInk(wall: Wall, doors: Door[] = [], windows: Window[], yiel
 
   return inkVolume;
 }
+
+export function calcMinimumInkCans(value: number, sizes: Array<number>) {
+  const descSizes = sizes.sort((a, b) => b - a);
+  const result: { [key: number]: number } = descSizes
+    .reduce((acc, size) => ({ ...acc, [size]: 0 }), {});
+
+  let subValue = value;
+  for (let i = 0; i < descSizes.length; i += 1) {
+    const a = subValue / descSizes[i];
+    if (i !== descSizes.length - 1) {
+      result[descSizes[i]] = Math.floor(a);
+      subValue -= (Math.floor(a) * descSizes[i]);
+    } else {
+      result[descSizes[i]] = Math.ceil(a);
+      subValue -= (Math.ceil(a) * descSizes[i]);
+    }
+  }
+
+  return result;
+}

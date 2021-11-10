@@ -29,9 +29,13 @@ describe('Helpers Functions', () => {
   });
 });
 
+describe('calculator validations', () => {
+  test('', () => {});
+});
+
 describe('Wall dimensions constrains', () => {
   test('no walls should be less than 1 meter and more than 15 meters - No Doors or windows', () => {
-    const message = 'A wall must have at least 1 and at most 15';
+    const message = 'A altura ou largura da parede deve ter entre 1m e 15m';
     const errorMessage = { valid: false, message };
     const okMessage = { valid: true };
     expect(inkCalculator.validateWallDimensions(failWall1)).toStrictEqual(errorMessage);
@@ -50,8 +54,43 @@ describe('Wall dimensions constrains', () => {
   });
 });
 
-describe('doors and windows [min, max] quantity', () => {
-  test('', () => {
+describe('Ink computation result functions', () => {
+  test('calcMinimumInkCans() compute intelligent ink cans computation', () => {
+    const result1 = inkCalculator.calcMinimumInkCans(0.8, [0.5, 2.5, 3.6, 18]);
+    const expected1 = {
+      0.5: 2, 2.5: 0, 3.6: 0, 18: 0,
+    };
 
+    const result2 = inkCalculator.calcMinimumInkCans(2.5, [0.5, 2.5, 3.6, 18]);
+    const expected2 = {
+      0.5: 0, 2.5: 1, 3.6: 0, 18: 0,
+    };
+    expect(result2).toStrictEqual(expected2);
+
+    expect(result1).toStrictEqual(expected1);
+
+    const result3 = inkCalculator.calcMinimumInkCans(3.54, [0.5, 2.5, 3.6, 18]);
+    const expected3 = {
+      0.5: 3, 2.5: 1, 3.6: 0, 18: 0,
+    };
+    expect(result3).toStrictEqual(expected3);
+
+    const result4 = inkCalculator.calcMinimumInkCans(20.45, [0.5, 2.5, 3.6, 18]);
+    const expected4 = {
+      0.5: 5, 2.5: 0, 3.6: 0, 18: 1,
+    };
+    expect(result4).toStrictEqual(expected4);
+
+    const result5 = inkCalculator.calcMinimumInkCans(20.5, [0.5, 2.5, 3.6, 18]);
+    const expected5 = {
+      0.5: 0, 2.5: 1, 3.6: 0, 18: 1,
+    };
+    expect(result5).toStrictEqual(expected5);
+
+    const result6 = inkCalculator.calcMinimumInkCans(1.5999999999999999, [0.5, 2.5, 3.6, 18]);
+    const expected6 = {
+      0.5: 4, 2.5: 0, 3.6: 0, 18: 0,
+    };
+    expect(result6).toStrictEqual(expected6);
   });
 });

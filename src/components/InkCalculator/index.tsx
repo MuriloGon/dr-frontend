@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Wall, initialState } from './_utils';
+import { Wall, initialState, Walls } from './_utils';
 import InkResult from './InkResult';
 import InkForms from './InkForms';
 
 function InkCalculator() {
   const [currentWall, setCurrentWall] = useState<Wall>(Wall.wallA1);
-  const [walls, setWalls] = useState(initialState);
+  const [walls, setWalls] = useState<Walls>(initialState);
 
   const setHeight = (height: number) => (
     setWalls((st) => ({
@@ -28,6 +28,10 @@ function InkCalculator() {
     setHeight, setWidth, setDoors, setWindows,
   };
 
+  const resetComputations = () => {
+    setWalls(initialState);
+  };
+
   const windowDim = { width: 2, height: 1.2 };
   const doorDim = { width: 0.8, height: 1.9 };
 
@@ -40,6 +44,7 @@ function InkCalculator() {
         walls={walls}
       />
       <InkResult
+        resetComputations={resetComputations}
         windowDimension={windowDim}
         doorDimension={doorDim}
         walls={walls}

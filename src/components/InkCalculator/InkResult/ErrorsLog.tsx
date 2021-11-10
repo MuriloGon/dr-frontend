@@ -14,6 +14,7 @@ const ErrorsLog: FC<Props> = ({ wallsErrors }) => {
   const withErros = wallsErrors.filter(({ validations }) => validations.length > 0);
   return (
     <>
+      <h3>Erros dos parâmetros usados</h3>
       {withErros.map(({ wallName, validations }, i) => (
         <div key={`${wallName}-${i}`}>
           <h3>
