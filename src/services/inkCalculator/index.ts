@@ -45,7 +45,9 @@ export function validateAreaCovered(
   return { valid: true };
 }
 
-export function minimumWallHeight(height: number, doors: Door[], windows: Window[], offset = 0.3) {
+export function validateMinimumWallHeight(
+  height: number, doors: Door[], windows: Window[], offset = 0.3,
+) {
   const minHeight = minWallHeight(doors, windows) + offset;
   if (height < minHeight) {
     const message = `A parede deve ter, pelo menos, ${minHeight.toFixed(2)}m de altura`;
@@ -54,7 +56,9 @@ export function minimumWallHeight(height: number, doors: Door[], windows: Window
   return { valid: true };
 }
 
-export function minimumWallWidth(height: number, doors: Door[], windows: Window[], offset = 0.3) {
+export function validadeMinimumWallWidth(
+  height: number, doors: Door[], windows: Window[], offset = 0.3,
+) {
   const minWidth = minWallWidth(doors, windows) + offset;
   if (height < minWidth) {
     const message = `A parede deve ter, pelo menos, ${minWidth.toFixed(2)}m de largura`;
@@ -76,8 +80,8 @@ export function validateWallDimensions(wall: Wall) {
 export function validations(wall: Wall, doors: Door[], windows: Window[]) {
   const validateDims = validateWallDimensions(wall);
   const validateArea = validateAreaCovered(wall, doors, windows);
-  const validateMinHeight = minimumWallHeight(wall.height, doors, windows);
-  const validateMinWidth = minimumWallWidth(wall.width, doors, windows);
+  const validateMinHeight = validadeMinimumWallWidth(wall.height, doors, windows);
+  const validateMinWidth = validadeMinimumWallWidth(wall.width, doors, windows);
   return [validateDims, validateArea, validateMinHeight, validateMinWidth];
 }
 

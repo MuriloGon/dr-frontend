@@ -30,7 +30,30 @@ describe('Helpers Functions', () => {
 });
 
 describe('calculator validations', () => {
-  test('', () => {});
+  test('validadeMinimumWallWidth()', () => {
+    const result = inkCalculator.validateMinimumWallHeight(
+      2, [{ width: 0.8, height: 1.9 }], [{ width: 2, height: 1.8 }],
+    );
+    expect(result).toStrictEqual(
+      { valid: false, message: 'A parede deve ter, pelo menos, 2.20m de altura' },
+    );
+    const result2 = inkCalculator.validateMinimumWallHeight(
+      4, [{ width: 0.8, height: 1.9 }], [{ width: 2, height: 1.8 }],
+    );
+    expect(result2).toStrictEqual({ valid: true });
+  });
+  test('validadeMinimumWallWidth()', () => {
+    const result = inkCalculator.validadeMinimumWallWidth(
+      0.3, [{ width: 0.8, height: 1.9 }], [{ width: 0.3, height: 1.8 }],
+    );
+    expect(result).toStrictEqual(
+      { valid: false, message: 'A parede deve ter, pelo menos, 1.10m de largura' },
+    );
+    const result2 = inkCalculator.validadeMinimumWallWidth(
+      2, [{ width: 0.8, height: 1.9 }], [{ width: 0.3, height: 1.8 }],
+    );
+    expect(result2).toStrictEqual({ valid: true });
+  });
 });
 
 describe('Wall dimensions constrains', () => {
@@ -92,5 +115,21 @@ describe('Ink computation result functions', () => {
       0.5: 4, 2.5: 0, 3.6: 0, 18: 0,
     };
     expect(result6).toStrictEqual(expected6);
+  });
+  test('totalInk() compute the total ink in liters', () => {
+    const totalArea1 = inkCalculator.totalInk(
+      { width: 10, height: 10 },
+      [{ width: 5, height: 5 }],
+      [{ width: 5, height: 5 }],
+    );
+    expect(totalArea1).toBe((100 - 50) / 5);
+
+    const totalArea2 = inkCalculator.totalInk(
+      { width: 10, height: 10 },
+      [{ width: 5, height: 5 }],
+      [{ width: 5, height: 5 }],
+      3,
+    );
+    expect(totalArea2).toBe((100 - 50) / 3);
   });
 });

@@ -7,6 +7,7 @@ type Props = {
   walls: Walls;
   doorDimensions: { width: number, height: number };
   windowDimensions: { width: number, height: number };
+  // eslint-disable-next-line react/no-unused-prop-types
   resetComputations: () => void;
 };
 
