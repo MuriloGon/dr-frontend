@@ -103,3 +103,28 @@ export const InputsContainer = styled.div`
   flex-flow: row wrap;
   justify-content: center;
 `;
+
+export const MessageErrorContainer = styled.div`
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  background: hsl(0, 100%, 90%);
+  color: hsl(0, 50%, 30%);
+`;
+
+export const ResultContainer = styled.div`
+  display: flex;
+  flex-flow: column;
+  overflow-y: auto;
+  padding: 20px;
+  max-height: 450px;
+  overflow-y: auto;
+
+  color: ${({ theme }) => theme.primary};
+  border: 1px solid ${({ theme }) => theme.primary};
+  border-radius: 8px;
+
+  ul { padding: 0 }
+
+  h3 { margin: 0; }
+`;
