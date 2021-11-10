@@ -4,7 +4,9 @@ import { MainContainer } from '@styles/containers';
 import { Routes } from '../utils/globalVariables';
 import Navbar from './Navbar';
 
-const AppContainer: FC = ({ children }) => {
+type Props = { isAuth: boolean, logout: () => void };
+
+const AppContainer: FC<Props> = ({ children, isAuth, logout }) => {
   const [route, setRoute] = useState<Routes>(Routes.home);
   const location = useLocation();
 
@@ -19,7 +21,7 @@ const AppContainer: FC = ({ children }) => {
 
   return (
     <MainContainer>
-      <Navbar currentRoute={route} />
+      <Navbar currentRoute={route} isAuth={isAuth} logout={logout} />
       <main>
         {children}
       </main>

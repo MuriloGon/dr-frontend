@@ -20,7 +20,7 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "ESLINT_NO_DEV_ERRORS=true craco start",
+    "start": "craco start",
     "build": "craco build",
     "test": "craco test",
     "eject": "craco eject",

@@ -1,8 +1,9 @@
 import React from 'react';
+import UserInkList from '@components/UserInksList';
 
 function UsersInks() {
   return (
-    <h1>UsersInks</h1>
+    <UserInkList />
   );
 }
 

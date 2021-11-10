@@ -4,10 +4,12 @@ import { NavbarContainer, NavButton } from '@styles/navbar';
 import { Routes } from '../utils/globalVariables';
 
 type Props = {
-  currentRoute: Routes
+  currentRoute: Routes;
+  isAuth: boolean;
+  logout: () => void;
 };
 
-const Navbar: FC<Props> = ({ currentRoute }) => {
+const Navbar: FC<Props> = ({ currentRoute, isAuth, logout }) => {
   const buttonSelected = (route: Routes) => currentRoute === route;
   return (
     <NavbarContainer>
@@ -37,8 +39,11 @@ const Navbar: FC<Props> = ({ currentRoute }) => {
           selected={buttonSelected(Routes.admin)}
           rounded="all"
           type="button"
+          onClick={() => {
+            if (isAuth) logout();
+          }}
         >
-          Login admin
+          {isAuth ? 'Logout admin' : 'Login admin'}
         </NavButton>
       </Link>
     </NavbarContainer>
