@@ -8,6 +8,11 @@ In the project directory, you can run:
 
 ### `npm start`
 
+> The application will use a mock api when running standalone. To run with the api set the env variable as follow:
+```bash
+REACT_APP_PROJ_ENV=remote npm start
+```
+
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
